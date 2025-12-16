@@ -46,15 +46,18 @@ export default async function PrivacyPage({
       </header>
 
       <div className="actions" style={{ marginTop: 0, marginBottom: 10 }}>
-        <Link className="btn" href={`/${app.slug}/`}>
+        <Link className="btn" href={`/${slug}/`}>
           <span className="dot" />
           返回 {c.appNameCn}
         </Link>
-        <Link className="btn" href={`/${app.slug}/support/`}>
+        <Link className="btn" href={`/${slug}/support/`}>
           支持与联系
         </Link>
-        <Link className="btn" href={`/${app.slug}/terms/`}>
+        <Link className="btn" href={`/${slug}/terms/`}>
           服务条款
+        </Link>
+        <Link className="btn" href={`/${slug}/en/privacy/`}>
+          English
         </Link>
       </div>
 

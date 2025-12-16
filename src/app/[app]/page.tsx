@@ -44,6 +44,16 @@ export default async function AppHome({
       </header>
 
       <section className="grid">
+        <article className="card">
+          <h2>语言 / Language</h2>
+          <p>本页面支持中英文。英文版用于国际审核/沟通更方便。</p>
+          <div className="actions">
+            <Link className="btn" href={`/${slug}/en/`}>
+              English version →
+            </Link>
+          </div>
+        </article>
+
         <article className="card half">
           <h2>隐私政策</h2>
           <p>说明收集的信息、用途、权限、数据安全、联系信息等。</p>

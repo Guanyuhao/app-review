@@ -46,15 +46,18 @@ export default async function SupportPage({
       </header>
 
       <div className="actions" style={{ marginTop: 0, marginBottom: 10 }}>
-        <Link className="btn" href={`/${app.slug}/`}>
+        <Link className="btn" href={`/${slug}/`}>
           <span className="dot" />
           返回 {c.appNameCn}
         </Link>
-        <Link className="btn" href={`/${app.slug}/privacy/`}>
+        <Link className="btn" href={`/${slug}/privacy/`}>
           隐私政策
         </Link>
-        <Link className="btn" href={`/${app.slug}/terms/`}>
+        <Link className="btn" href={`/${slug}/terms/`}>
           服务条款
+        </Link>
+        <Link className="btn" href={`/${slug}/en/support/`}>
+          English
         </Link>
       </div>
 
@@ -103,7 +106,7 @@ export default async function SupportPage({
 
       <footer>
         如果你在 App Store Connect 需要填写 Support URL，可以用本页面：{" "}
-        <span className="mono">/{app.slug}/support/</span>
+        <span className="mono">/{slug}/support/</span>
       </footer>
     </main>
   );

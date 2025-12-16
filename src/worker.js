@@ -3,6 +3,13 @@ export default {
     const url = new URL(request.url);
     const pathname = url.pathname;
 
+    // 浏览器常会请求 /favicon.ico；我们只提供 svg，统一重定向到 svg（避免 404/500）
+    if (pathname === "/favicon.ico") {
+      const icoToSvg = new URL(request.url);
+      icoToSvg.pathname = "/favicon.svg";
+      return Response.redirect(icoToSvg.toString(), 301);
+    }
+
     // Next 静态导出配置了 trailingSlash: true
     // 为了避免访问 /cold-wallet/privacy 变 404，这里统一补齐尾斜杠
     const last = pathname.split("/").pop() || "";
