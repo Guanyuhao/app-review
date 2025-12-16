@@ -39,7 +39,7 @@ export default function HomePage() {
       </section>
 
       <footer>
-        备注：把 Cloudflare Pages 的域名填入 App Store Connect 的 Support URL / Privacy Policy URL 即可。
+        {/* 备注：把 Cloudflare Pages 的域名填入 App Store Connect 的 Support URL / Privacy Policy URL 即可。 */}
       </footer>
     </main>
   );

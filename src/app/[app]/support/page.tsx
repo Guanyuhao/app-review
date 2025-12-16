@@ -103,11 +103,6 @@ export default async function SupportPage({
           <p style={{ marginTop: 8 }}>{c.reviewNotes.extra}</p>
         </article>
       </section>
-
-      <footer>
-        如果你在 App Store Connect 需要填写 Support URL，可以用本页面：{" "}
-        <span className="mono">/{slug}/support/</span>
-      </footer>
     </main>
   );
 }
