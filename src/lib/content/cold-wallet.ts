@@ -20,12 +20,11 @@ export const coldWalletContent = {
     "本应用不要求注册登录，不进行广告追踪"
   ],
   support: {
-    // TODO: 你把真实信息给我后，我帮你改成最终版
-    email: "support@your-domain.com",
-    website: "https://your-domain.com"
+    email: "guanyuhao666@gmai.com",
+    website: "https://app-review.guanyuhao666.workers.dev"
   },
   privacy: {
-    updatedAt: "YYYY-MM-DD",
+    updatedAt: "2025-12-16",
     highlights: [
       "默认无网络访问；助记词/私钥仅在设备本地加密存储",
       "不进行广告追踪，不进行跨应用追踪",
