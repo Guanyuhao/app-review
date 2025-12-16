@@ -1,0 +1,17 @@
+{
+  // 你的 workers.dev 域名会是：https://<name>.<你的账号>.workers.dev
+  "name": "app-review",
+  "compatibility_date": "2025-12-16",
+  "workers_dev": true,
+
+  // 用 Worker 代码来托管静态资源（可加安全头/缓存/重定向等）
+  "main": "src/worker.js",
+
+  // 关键：把 Next 静态导出目录作为静态资产发布
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS"
+  }
+}
+
+

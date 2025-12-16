@@ -95,7 +95,7 @@ export default async function TermsPage({
 
         <div className="note">
           <p style={{ margin: 0 }}>
-            TODO：把联系信息与条款内容按你真实情况完善（尤其是订阅/付费条款，如有）。
+            如你在使用过程中有任何问题或建议，请通过上面的联系方式与我们联系。
           </p>
         </div>
       </section>

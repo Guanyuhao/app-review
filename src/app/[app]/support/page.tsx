@@ -68,7 +68,9 @@ export default async function SupportPage({
             网站：<strong>{c.support.website}</strong>
           </p>
           <div className="note">
-            <p style={{ margin: 0 }}>TODO：把上面邮箱/网站换成你真实信息（苹果审核会看这个）。</p>
+            <p style={{ margin: 0 }}>
+              如需支持与反馈，请通过上述邮箱联系我们；我们会尽快回复。
+            </p>
           </div>
         </article>
 

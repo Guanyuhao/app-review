@@ -67,7 +67,9 @@ export default async function PrivacyPage({
 
         <div className="note">
           <p style={{ margin: 0 }}>
-            TODO：请把联系邮箱与网站域名替换为真实信息：{c.support.email} / {c.support.website}。
+            联系方式：
+              <br />
+              {c.support.email} <br /> {c.support.website}
           </p>
         </div>
 

@@ -14,9 +14,19 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(124, 92, 255, 0.35), transparent 60%),
+    radial-gradient(900px 500px at 80% 20%, rgba(34, 197, 94, 0.20), transparent 55%),
+    radial-gradient(900px 700px at 50% 90%, rgba(56, 189, 248, 0.18), transparent 55%),
+    var(--bg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 body {
-  height: 100%;
+  min-height: 100dvh;
 }
 
 body {
@@ -24,11 +34,7 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans";
   color: var(--text);
-  background:
-    radial-gradient(1200px 600px at 20% 10%, rgba(124, 92, 255, 0.35), transparent 60%),
-    radial-gradient(900px 500px at 80% 20%, rgba(34, 197, 94, 0.20), transparent 55%),
-    radial-gradient(900px 700px at 50% 90%, rgba(56, 189, 248, 0.18), transparent 55%),
-    var(--bg);
+  background: transparent;
 }
 
 a {

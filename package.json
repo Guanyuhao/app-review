@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier -w .",
-    "format:check": "prettier -c ."
+    "format:check": "prettier -c .",
+    "deploy:worker": "pnpm build && wrangler deploy"
   },
   "dependencies": {
     "next": "^15.1.0",
@@ -23,6 +24,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "15.5.9",
     "prettier": "^3.7.4",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "wrangler": "^3.114.15"
   }
 }
