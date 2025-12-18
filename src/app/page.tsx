@@ -1,37 +1,28 @@
 import Link from "next/link";
-import { APPS } from "../lib/apps";
+import { getAllApps } from "@/lib/app-registry";
 
-export default function HomePage() {
+export default function Home() {
+  const apps = getAllApps();
+
   return (
     <main className="wrap">
       <header className="top">
         <div>
-          <h1 className="title">App 审核信息页面</h1>
-          <p className="subtitle">
-            这里集中提供 App Store 审核常见需要的链接：隐私政策、支持与联系、服务条款。
-          </p>
+          <h1 className="title">App 审核信息</h1>
+          <p className="subtitle">App Store Review Pages</p>
         </div>
-        <div className="pill">Cloudflare Pages · Next.js 静态导出</div>
+        <div className="pill">Static Pages</div>
       </header>
 
       <section className="grid">
-        {APPS.map((app) => (
-          <article key={app.slug} className="card">
-            <h2>{app.displayName}</h2>
-            <p>{app.shortDescription}</p>
+        {apps.map((app) => (
+          <article key={app.slug} className="card half">
+            <h2>{app.meta.appName}</h2>
+            <p>Bundle ID: {app.meta.bundleId || "N/A"}</p>
             <div className="actions">
               <Link className="btn primary" href={`/${app.slug}/`}>
                 <span className="dot" />
                 进入页面
-              </Link>
-              <Link className="btn" href={`/${app.slug}/privacy/`}>
-                隐私政策
-              </Link>
-              <Link className="btn" href={`/${app.slug}/support/`}>
-                支持与联系
-              </Link>
-              <Link className="btn" href={`/${app.slug}/terms/`}>
-                服务条款
               </Link>
             </div>
           </article>
@@ -39,10 +30,10 @@ export default function HomePage() {
       </section>
 
       <footer>
-        {/* 备注：把 Cloudflare Pages 的域名填入 App Store Connect 的 Support URL / Privacy Policy URL 即可。 */}
+        <p style={{ fontSize: "0.875rem", color: "#666", margin: 0 }}>
+          提示：这些页面用于 App Store Connect 审核，包含隐私政策、支持与联系、服务条款、审核备注。
+        </p>
       </footer>
     </main>
   );
 }
-
-

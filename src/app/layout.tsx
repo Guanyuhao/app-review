@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "App 审核信息",
-  description: "用于 App Store 审核的静态页面集合（隐私政策、支持与联系、服务条款）。",
-  robots: { index: true, follow: true }
+  title: "App 审核信息 | App Store Review Pages",
+  description: "用于 App Store 审核的静态页面集合（隐私政策、支持与联系、服务条款、审核备注）。",
+  robots: { index: true, follow: true },
+  openGraph: {
+    type: "website",
+    locale: "zh_CN",
+    alternateLocale: "en_US",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

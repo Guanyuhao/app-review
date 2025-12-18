@@ -1,103 +1,85 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllAppSlugs, getApp, getContent } from "@/lib/registry";
+import { notFound } from "next/navigation";
+import { getApp } from "@/lib/app-registry";
+import { pageExists, type PageType } from "@/lib/content-loader";
 
 export function generateStaticParams() {
-  return getAllAppSlugs().map((app) => ({ app }));
+  const { generateAppParams } = require("@/lib/app-registry");
+  return generateAppParams();
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: Promise<{ app: string }>;
 }): Promise<Metadata> {
   const { app: slug } = await params;
   const app = getApp(slug);
-  const c = getContent(slug);
-  if (!app || !c) return { title: "App 审核信息" };
+  if (!app) {
+    return { title: "App 审核信息" };
+  }
   return {
-    title: `${c.appNameCn}（${c.appNameEn}）审核信息`,
-    description: "用于 App Store 审核的信息页面：隐私政策、支持与联系、服务条款。"
+    title: `${app.meta.appName} - 审核信息`,
+    description: `用于 App Store 审核的信息页面：隐私政策、支持与联系、服务条款、审核备注。`,
   };
 }
 
+const PAGE_TYPES: Array<{ type: PageType; zh: string; en: string }> = [
+  { type: "privacy", zh: "隐私政策", en: "Privacy Policy" },
+  { type: "support", zh: "支持与联系", en: "Support & Contact" },
+  { type: "terms", zh: "服务条款", en: "Terms of Service" },
+  { type: "review-notes", zh: "审核备注", en: "Review Notes" },
+];
+
 export default async function AppHome({
-  params
+  params,
 }: {
   params: Promise<{ app: string }>;
 }) {
   const { app: slug } = await params;
   const app = getApp(slug);
-  const c = getContent(slug);
-  if (!app || !c) return null;
+  if (!app) {
+    notFound();
+  }
 
   return (
     <main className="wrap">
       <header className="top">
         <div>
-          <h1 className="title">
-            {c.appNameCn}（{c.appNameEn}）
-          </h1>
-          <p className="subtitle">{c.tagline}</p>
+          <h1 className="title">{app.meta.appName}</h1>
+          <p className="subtitle">静态页面 · 审核用</p>
         </div>
-        <div className="pill">静态页面 · 审核用</div>
+        <div className="pill">App Review</div>
       </header>
 
       <section className="grid">
-        <article className="card">
-          <h2>语言 / Language</h2>
-          <p>本页面支持中英文。英文版用于国际审核/沟通更方便。</p>
-          <div className="actions">
-            <Link className="btn" href={`/${slug}/en/`}>
-              English version →
-            </Link>
-          </div>
-        </article>
+        {PAGE_TYPES.map((page) => {
+          const hasZh = pageExists(slug, page.type, "zh");
+          const hasEn = pageExists(slug, page.type, "en");
+          if (!hasZh && !hasEn) return null;
 
-        <article className="card half">
-          <h2>隐私政策</h2>
-          <p>说明收集的信息、用途、权限、数据安全、联系信息等。</p>
-          <div className="actions">
-            <Link className="btn primary" href={`/${app.slug}/privacy/`}>
-              <span className="dot" />
-              查看隐私政策
-            </Link>
-          </div>
-        </article>
-
-        <article className="card half">
-          <h2>支持与联系</h2>
-          <p>提供客服邮箱、FAQ、订阅/退款说明（如适用）。</p>
-          <div className="actions">
-            <Link className="btn primary" href={`/${app.slug}/support/`}>
-              <span className="dot green" />
-              打开支持页面
-            </Link>
-          </div>
-        </article>
-
-        <article className="card">
-          <h2>服务条款（可选）</h2>
-          <p>如果你的 App 有订阅/付费、用户规则约束，建议提供条款页。</p>
-          <div className="actions">
-            <Link className="btn" href={`/${app.slug}/terms/`}>
-              查看服务条款
-            </Link>
-          </div>
-        </article>
-
-        <article className="card">
-          <h2>商店文案（摘要）</h2>
-          <p style={{ marginBottom: 8 }}>{c.promotionalText}</p>
-          <ul>
-            {c.features.map((x) => (
-              <li key={x}>{x}</li>
-            ))}
-          </ul>
-          <div className="note">
-            <p style={{ margin: 0 }}>重要说明：{c.importantNotes.join("；")}。</p>
-          </div>
-        </article>
+          return (
+            <article key={page.type} className="card half">
+              <h2>{page.zh}</h2>
+              <p>{page.en}</p>
+              <div className="actions">
+                {hasZh && (
+                  <Link className="btn primary" href={`/${slug}/${page.type}/`}>
+                    <span className="dot" />
+                    {page.zh}
+                  </Link>
+                )}
+                {hasEn && (
+                  <Link className="btn primary" href={`/${slug}/en/${page.type}/`}>
+                    <span className="dot green" />
+                    {page.en}
+                  </Link>
+                )}
+              </div>
+            </article>
+          );
+        })}
       </section>
 
       <footer>
@@ -108,5 +90,3 @@ export default async function AppHome({
     </main>
   );
 }
-
-
